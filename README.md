@@ -9,7 +9,7 @@ A Dockerfile that follows instructions on the Adapt Authoring Wiki page for [ser
 2. Build the adapt authoring dockerfile
 
 	```
-docker build -t "dockerfile/adapt-authoring" github.com/csilk/adapt-authoring-dockerfile
+docker build -t "dockerfile/adapt-authoring" github.com/BravoLT/adapt-authoring-dockerfile
 ```
 
 3. Run the docker container
