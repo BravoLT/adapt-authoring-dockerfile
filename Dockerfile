@@ -9,15 +9,20 @@ RUN     curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
 RUN     apt-get install --yes nodejs
 
 RUN echo -e "----------------------\nStarting npm installations \n----------------------"
+RUN     /usr/bin/sudo npm install -g grunt-cli adapt-cli n
+RUN echo -e "----------------------\nRunning node upgrade.js via n stable \n----------------------"
+RUN     /usr/bin/sudo n stable
 
-RUN     /usr/bin/sudo npm install -g grunt-cli adapt-cli
-RUN     git clone https://github.com/adaptlearning/adapt_authoring.git
+#RUN     git clone https://github.com/adaptlearning/adapt_authoring.git
+RUN echo -e "-------- xx \n----------------------"
+RUN      git clone https://github.com/BravoLT/adapt_authoring.git
 WORKDIR "/adapt_authoring"
+RUN     git checkout feature/1-making-it-work-with-docker
 RUN     npm install --production
 
-#RUN echo -e "----------------------\nRunning adapt install, please install on port 80 \n----------------------"
+RUN echo -e "----------------------\nRunning adapt install, please install on port 80 \n----------------------"
 RUN node install
-#RUN echo -e "----------------------\nRunning adapt server \n----------------------"
+RUN echo -e "----------------------\nRunning adapt server \n----------------------"
 RUN node server
-#RUN echo -e "----------------------\nShould be good to go :) \n----------------------"
+RUN echo -e "----------------------\nShould be good to go :) \n----------------------"
 EXPOSE 80
