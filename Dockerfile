@@ -32,8 +32,8 @@ RUN echo -e "----------------------\nRunning adapt install, please install on po
 RUN pwd
 RUN cd /adapt_authoring
 RUN pwd
-RUN node install
-RUN echo -e "----------------------\nRunning adapt server \n----------------------"
-RUN pwd
-RUN node server
-RUN echo -e "----------------------\nShould be good to go :) \n----------------------"
+RUN sudo service mongodb start && node install && node server
+#RUN echo -e "----------------------\nRunning adapt server \n----------------------"
+#RUN pwd
+#RUN node server
+#RUN echo -e "----------------------\nShould be good to go :) \n----------------------"
