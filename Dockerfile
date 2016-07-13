@@ -20,9 +20,20 @@ WORKDIR "/adapt_authoring"
 RUN     git checkout feature/1-making-it-work-with-docker
 RUN     npm install --production
 
+RUN		sudo service mongodb start
+RUN		sudo apt-get install net-tools
+RUN     sudo apt-get install nano
+RUN     sudo npm install sweetalert
+
+EXPOSE 80
+EXPOSE 5000
+
 RUN echo -e "----------------------\nRunning adapt install, please install on port 80 \n----------------------"
+RUN pwd
+RUN cd /adapt_authoring
+RUN pwd
 RUN node install
 RUN echo -e "----------------------\nRunning adapt server \n----------------------"
+RUN pwd
 RUN node server
 RUN echo -e "----------------------\nShould be good to go :) \n----------------------"
-EXPOSE 80
