@@ -26,16 +26,20 @@ send "\r"
 expect "SMTP password"
 exp_internal 1
 send "\r"
-set timeout 60
 expect "Sender email address"
 send "\r"
 expect "(master)"
 send "\r"
 expect "(Master)"
 send "\r"
+set timeout 540
+#expect "49G"
+#send "\r"
+#expect "\r\r\n"
+#send "\r"
 expect "Email address"
 send "bravolt\r"
 expect "Password"
 send "bravolt\r"
-send "exit\r"
+#send "exit\r"
 expect eof

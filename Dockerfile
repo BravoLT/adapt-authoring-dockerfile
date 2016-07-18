@@ -1,7 +1,7 @@
 # Adapt authoring server based on Ubuntu 16.04
 FROM ubuntu:16.04
 MAINTAINER Michael Nishizawa "michael.nishizawa@bravolt.com"
-RUN echo -e "----------------------\nStarting apt installations \n----------------------"
+RUN echo -e "----------------------\nStarting apt installations - Fresh\n----------------------"
 
 RUN     apt-get update
 RUN     apt-get install --yes build-essential git sudo curl mongodb ffmpeg frei0r-plugins
@@ -30,11 +30,8 @@ EXPOSE 5000
 RUN cd /adapt_authoring
 RUN echo -e "---------------------- Adding the expect-adapt shell script ----------------------\n"
 ADD expect-adapt.sh /adapt_authoring/expect-adapt.sh
-CMD chmod 755 expect-adapt.sh
-#RUN service mongodb start && expect /adapt_authoring/expect-adapt.sh && node server
-#RUN sudo service mongodb start && expect /adapt_authoring/expect-adapt.sh && node server
-#RUN sudo service mongodb start 
-RUN sudo apt-get install mongodb
-RUN service mongodb start
-RUN expect /adapt_authoring/expect-adapt.sh
-RUN node server
+RUN chmod 755 expect-adapt.sh
+RUN mongod --config /etc/mongodb.conf --smallfiles & expect /adapt_authoring/expect-adapt.sh
+CMD mongod --config /etc/mongodb.conf --smallfiles && node server
+RUN echo -e "\n\nFinished DockerFile install!!\n\n"
+
