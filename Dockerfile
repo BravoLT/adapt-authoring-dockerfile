@@ -32,6 +32,7 @@ RUN echo -e "---------------------- Adding the expect-adapt shell script -------
 ADD expect-adapt.sh /adapt_authoring/expect-adapt.sh
 RUN chmod 755 expect-adapt.sh
 
-RUN mongod --config /etc/mongodb.conf --smallfiles & cd /adapt_authoring; npm install -g grunt grunt-cli; expect /adapt_authoring/expect-adapt.sh
-CMD mongod --config /etc/mongodb.conf --smallfiles & grunt build:prod; node server;
+RUN mongod --config /etc/mongodb.conf --smallfiles & cd /adapt_authoring; npm install -g grunt grunt-cli; expect /adapt_authoring/expect-adapt.sh;
+# NOTE -> can't get grunt build:prod to work (errors on origin.js) but grunt build:dev will work after about 1 minute upon docker run of image
+CMD mongod --config /etc/mongodb.conf --smallfiles & grunt build:dev; node server;
 RUN echo -e "\n\nFinished DockerFile install!!\n\n"
