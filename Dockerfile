@@ -20,7 +20,6 @@ RUN     git checkout feature/1-making-it-work-with-docker
 RUN     npm install --production
 
 RUN		sudo apt-get install net-tools
-RUN     sudo apt-get install nano
 RUN     sudo npm install sweetalert
 RUN     echo 'Y' | sudo apt-get install expect
 
@@ -34,5 +33,5 @@ RUN chmod 755 expect-adapt.sh
 
 RUN mongod --config /etc/mongodb.conf --smallfiles & cd /adapt_authoring; npm install -g grunt grunt-cli; expect /adapt_authoring/expect-adapt.sh;
 # NOTE -> can't get grunt build:prod to work (errors on origin.js) but grunt build:dev will work after about 1 minute upon docker run of image
-CMD mongod --config /etc/mongodb.conf --smallfiles & grunt build:dev; node server;
+CMD mongod --config /etc/mongodb.conf --smallfiles && grunt build:dev && node server;
 RUN echo -e "\n\nFinished DockerFile install!!\n\n"
